@@ -4,7 +4,7 @@ if(isset($_POST['sendebutton'])){
      
     //beim absenden des formulars post daten in session varibalen schreiben
  
-    $echo = $_SESSION['liga'] = (string)$_POST['liga'];
+    $echo = $_SESSION['team'] = (string)$_POST['team'];
  
 	echo $echo;
 }  
@@ -51,12 +51,12 @@ include('include/mysql.php');
 				
 				<div id="content">
 				
-				<h1>TEAM</h1>
-				<h2>WÄHLEN SIE BITTE DAS TEAM AUS</h2>
+				<h1>SPIELPLAN</h1>
+				<h2>WÄHLEN SIE BITTE DAS SPIEL AUS</h2>
 				
-				<form action="question_timetable.php" method="post">
+				<form action="question2.php" method="post">
 					
-				<?php
+				<!--<?php
 					if ($echo == "1bundesliga") {
 						?><select name="team">
 							<option value="bremen">Werder Bremen</option>
@@ -86,12 +86,40 @@ include('include/mysql.php');
 							<option value="mancity">Manchester City</option>
 						</select><?php
 					}
-				?>
+				?>-->
+				
+				<?php
+					$servername = "localhost";
+					$username = "root";
+					$password = "";
+					$dbname = "pitchinvaders";
+
+					// Create connection
+					$conn = mysqli_connect($servername, $username, $password, $dbname);
+					// Check connection
+					if (!$conn) {
+						die("Connection failed: " . mysqli_connect_error());
+					}
+
+					$sql = "SELECT * FROM bremen";
+					$result = mysqli_query($conn, $sql);
+
+					if (mysqli_num_rows($result) > 0) {
+						// output data of each row
+						while($row = mysqli_fetch_assoc($result)) {
+							echo "id: " . $row["spielid"]. " - Name: " . $row["Datum"]. " " . $row["Ort"]. "<br>";
+						}
+					} else {
+						echo "0 results";
+					}
+
+					mysqli_close($conn);
+					?> 
 
 				<br>
 					<!--<input type="text" name="personen"></input> <br>-->
 						
-					<button type="submit" name="sendebutton" >WEITER</button>
+					<button type="submit">WEITER</button>
 				</form>
 				
 				
