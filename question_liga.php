@@ -65,8 +65,8 @@ include('include/mysql.php');
 						</select><?php
 					} elseif ($echo == "ch") {
 						?><select name="liga">
-							<option value="superleaque">Super League</option>
-							<option value="challengeleague">Challenge League</option>
+							<option value="superleaque">Raiffeisen Super League</option>
+							<option value="challengeleague">Brack.ch Challenge League</option>
 						</select><?php
 					} elseif ($echo == "es") {
 						?><select name="liga">
